@@ -6,13 +6,10 @@ Description:
 
 import os
 
+from config.variables import INPUT_DATA, OUTPUT_DATA
 from src.data import load_data, save_data
 from src.models import LinearRegression
 
-
-DATA_DIR = "data"
-INPUT_DATA = os.path.join(DATA_DIR, "input")
-OUTPUT_DATA = os.path.join(DATA_DIR, "output")
 
 def main():
     """
