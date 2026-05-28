@@ -17,8 +17,10 @@ def parse_arguments():
     Parse command-line arguments for the script.
     """
     parser = ArgumentParser(description="Run the machine learning model.")
-    parser.add_argument("--input", type=str, default="input_data.csv", help="Path to input data")
-    parser.add_argument("--output", type=str, default="predictions.csv", help="Path to save predictions")
+    parser.add_argument("--input", "-i", type=str, default="input_data.csv", help="Input data")
+    parser.add_argument("--output", "-o", type=str, default="predictions.csv", help="Output data")
+    parser.add_argument("--weight", "-w", type=float, default=1.0, help="Weight LR model")
+    parser.add_argument("--intercept", "-b", type=float, default=0.0, help="Intercept  LR model")
     return parser.parse_args()
 
 
@@ -30,9 +32,11 @@ def main():
     args = parse_arguments()
     input_data_file = os.path.join(INPUT_DATA_DIR, args.input)
     output_data_file = os.path.join(OUTPUT_DATA_DIR, args.output)
+    weight = args.weight
+    intercept = args.intercept
 
-    # Initialize the model (using dummy parameters for demonstration)
-    model = LinearRegression(weight=1, intercept=0)
+    # Initialize the model with command-line arguments
+    model = LinearRegression(weight=weight, intercept=intercept)
 
     # Load data
     data = load_data(input_data_file)
