@@ -56,3 +56,12 @@ class LinearRegression:
             The result of the linear regression calculation.
         """
         return [self._calculate(value) for value in data]
+
+class Dummy:
+    pass
+
+class Forest:
+    pass
+
+class KNN:
+    pass

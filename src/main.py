@@ -9,9 +9,14 @@ import os
 
 from loguru import logger
 
-from config.variables import INPUT_DATA_DIR, OUTPUT_DATA_DIR
+from config.variables import INPUT_DATA_DIR, OUTPUT_DATA_DIR, MODEL_TYPE
 from src.data import load_data, save_data
-from src.models import LinearRegression
+
+
+if MODEL_TYPE == "linear":
+    from src.models import LinearRegression as Model
+else: 
+    raise ValueError(f"Unsupported MODEL_TYPE: {MODEL_TYPE}")
 
 
 def parse_arguments():
@@ -42,7 +47,7 @@ def main():
     # Initialize the model with command-line arguments
     logger.info("Init model")
     logger.debug(f"Params: {weight} and intercept: {intercept}")
-    model = LinearRegression(weight=weight, intercept=intercept)
+    model = Model(weight=weight, intercept=intercept)
 
     # Load data
     logger.info("Loading data")
