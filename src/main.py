@@ -7,6 +7,8 @@ Description:
 from argparse import ArgumentParser
 import os
 
+from loguru import logger
+
 from config.variables import INPUT_DATA_DIR, OUTPUT_DATA_DIR
 from src.data import load_data, save_data
 from src.models import LinearRegression
@@ -28,6 +30,8 @@ def main():
     """
     Main function to execute the machine learning model and print predictions.
     """
+    logger.info("Starting ML Model inference")
+
     # Parse command-line arguments
     args = parse_arguments()
     input_data_file = os.path.join(INPUT_DATA_DIR, args.input)
@@ -36,17 +40,25 @@ def main():
     intercept = args.intercept
 
     # Initialize the model with command-line arguments
+    logger.info("Init model")
+    logger.debug(f"Params: {weight} and intercept: {intercept}")
     model = LinearRegression(weight=weight, intercept=intercept)
 
     # Load data
+    logger.info("Loading data")
     data = load_data(input_data_file)
 
     # Make predictions
+    logger.info("Making predictions")
     predictions = model.predict(data)
-    print(f"Predictions: {predictions}")
+    logger.debug(f"Predictions: {predictions[:5]}...")
 
     # Save predictions
+    logger.info("Saving predictions")
     save_data(output_data_file, predictions)
+
+    # End of the script
+    logger.info("Finished ML Model inference")
 
 if __name__ == "__main__":
     main()
