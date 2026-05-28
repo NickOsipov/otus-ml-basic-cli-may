@@ -9,5 +9,5 @@ import os
 
 
 DATA_DIR = "data"
-INPUT_DATA = os.path.join(DATA_DIR, "input")
-OUTPUT_DATA = os.path.join(DATA_DIR, "output")
+INPUT_DATA_DIR = os.path.join(DATA_DIR, "input")
+OUTPUT_DATA_DIR = os.path.join(DATA_DIR, "output")
